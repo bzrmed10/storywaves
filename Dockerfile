@@ -7,4 +7,4 @@ COPY . /app
 RUN npm run build --prod
 
 FROM nginx:stable-perl
-COPY --from=build /app/dist/google-ai-gemini-angular /usr/share/nginx/html
+COPY --from=build /app/dist/storywaves /usr/share/nginx/html

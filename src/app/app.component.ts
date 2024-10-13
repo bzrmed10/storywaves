@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   A positive message or moral.
   Soft, soothing descriptions that promote relaxation.
   The story should be no longer than 600 words and simple and clear`;*/
+  title = 'storywaves';
   generatedText = '';
   selectedGenre: string = '';
   selectedLanguage: string = '';
