@@ -35,6 +35,9 @@
   <div class="genre-container">
     <div
       class="genre-item"
+      [ngClass]="{
+        'btn-selectedGenre': selectedGenre === genre.title
+      }"
       *ngFor="let genre of genres"
       (click)="setGenre(genre.title)"
     >

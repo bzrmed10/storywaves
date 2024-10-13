@@ -67,7 +67,15 @@ h5 {
   cursor: pointer;
   margin-right: 10px;
 }
-
+.btn-selectedGenre {
+  background-color: #cc7bffa3; /* Purple color */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
 .btn-unselected:hover {
   background-color: #a6b1e1;
   color: white; /* Purple color */

@@ -78,7 +78,9 @@ export class ParametersComponent {
   ];
   selectedLanguage: string = '';
   selectedStoryLength: number = 0;
+  selectedGenre: string = '';
   setGenre(genre: string): void {
+    this.selectedGenre = genre;
     this.genreChange.emit(genre);
   }
 
