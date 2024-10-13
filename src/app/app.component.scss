@@ -98,7 +98,13 @@ h5 {
 }
 
 /* HTML: <div class="loader"></div> */
-
+.loading-message {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
 .loader-container {
   display: flex;
   justify-content: center;

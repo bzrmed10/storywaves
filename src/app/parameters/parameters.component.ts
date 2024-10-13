@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-parameters',
@@ -65,18 +70,11 @@ export class ParametersComponent {
       link: '../../assets/pics/genres/Comedy & Fun.jpeg',
     },
   ];
-  languages: string[] = [
-    'French',
-    'English',
-    'Arabic',
-    'Spanish',
-    'Danish',
-    'Russian',
-  ];
+  languages: string[] = ['English', 'French', 'Spanish', 'Danish', 'Russian'];
   storyLengths: { label: string; value: number }[] = [
-    { label: 'Short', value: 2000 },
-    { label: 'Medium', value: 5000 },
-    { label: 'Long', value: 10000 },
+    { label: 'Short', value: 5000 },
+    { label: 'Medium', value: 10000 },
+    { label: 'Long', value: 15000 },
   ];
   selectedLanguage: string = '';
   selectedStoryLength: number = 0;
@@ -86,10 +84,12 @@ export class ParametersComponent {
 
   setLanguage(language: string): void {
     this.selectedLanguage = language;
+
     this.languageChange.emit(language);
   }
   setStoryLength(length: number): void {
     this.selectedStoryLength = length;
+
     this.storyLengthChange.emit(length);
   }
 }

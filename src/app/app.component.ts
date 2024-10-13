@@ -78,7 +78,7 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
     const story = lines.slice(1).join('\n').trim();
 
     return {
-      title: title,
+      title: this.cleanTitle(title),
       story: story,
     };
   }
@@ -87,6 +87,10 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
     this.loading = false;
     this.selectedGenre = '';
     this.selectedLanguage = '';
-    this.selectedStoryLength = 2000;
+    this.selectedStoryLength = 5000;
+  }
+
+  cleanTitle(title: string): string {
+    return title.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
   }
 }
