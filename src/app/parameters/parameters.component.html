@@ -16,21 +16,6 @@
   </div>
 </div>
 <div class="m-2">
-  <h3 class="text100">Story Length</h3>
-  <button
-    type="button"
-    class="m-1"
-    [ngClass]="{
-      'btn-unselected': selectedStoryLength !== length.value,
-      'btn-selected': selectedStoryLength === length.value
-    }"
-    *ngFor="let length of storyLengths"
-    (click)="setStoryLength(length.value)"
-  >
-    {{ length.label }}
-  </button>
-</div>
-<div class="m-2">
   <h3 class="text100">Gategories</h3>
   <div class="genre-container">
     <div
@@ -46,4 +31,19 @@
       <p class="genre-title">{{ genre.title }}</p>
     </div>
   </div>
+</div>
+<div class="m-2">
+  <h3 class="text100">Story Length</h3>
+  <button
+    type="button"
+    class="m-1"
+    [ngClass]="{
+      'btn-unselected': selectedStoryLength !== length.value,
+      'btn-selected': selectedStoryLength === length.value
+    }"
+    *ngFor="let length of storyLengths"
+    (click)="setStoryLength(length.value)"
+  >
+    {{ length.label }}
+  </button>
 </div>

@@ -3,12 +3,14 @@ import {
   Component,
   EventEmitter,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 
 @Component({
   selector: 'app-parameters',
   templateUrl: './parameters.component.html',
   styleUrls: ['./parameters.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ParametersComponent {
   @Output() genreChange = new EventEmitter<string>();
