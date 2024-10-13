@@ -10,7 +10,20 @@
   --bg-200: #dcd6f7;
   --bg-300: #bbb9e9;
 }
-
+body {
+  color: white !important;
+  background-color: #17153bf5 !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: white !important;
+}
+.navbar {
+  background-color: #17153b !important;
+}
 /* Example usage */
 .bg100 {
   background-color: #f4eeff;
@@ -45,7 +58,7 @@
 
 /* Selected button style */
 .btn-selected {
-  background-color: #a6b1e1; /* Purple color */
+  background-color: #cc7bffa3; /* Purple color */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -62,8 +75,8 @@
 
 /* Unselected button style */
 .btn-unselected {
-  background-color: #f0f0f0; /* Light gray color */
-  color: #333; /* Dark gray text color */
+  background-color: #424874;
+  color: #a6b1e1;
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
