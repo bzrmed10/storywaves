@@ -14,7 +14,7 @@ import {
 })
 export class ParametersComponent {
   @Output() genreChange = new EventEmitter<string>();
-  @Output() languageChange = new EventEmitter<string>();
+  @Output() languageChange = new EventEmitter<{ name: string; code: string }>();
   @Output() storyLengthChange = new EventEmitter<number>();
 
   genres: { title: string; link: string }[] = [
@@ -72,13 +72,19 @@ export class ParametersComponent {
       link: '../../assets/pics/genres/Comedy & Fun.jpeg',
     },
   ];
-  languages: string[] = ['English', 'French', 'Spanish', 'Danish', 'Russian'];
+  //languages: string[] = ['English', 'French', 'Spanish', 'Danish', 'Russian'];
+  languages: { name: string; code: string }[] = [
+    { name: 'English', code: 'en-US' },
+    { name: 'French', code: 'fr-FR' },
+    { name: 'Spanish', code: 'es-ES' },
+    { name: 'Russian', code: 'ru-RU' },
+  ];
   storyLengths: { label: string; value: number }[] = [
     { label: 'Short', value: 5000 },
     { label: 'Medium', value: 10000 },
     { label: 'Long', value: 15000 },
   ];
-  selectedLanguage: string = '';
+  selectedLanguage: { name: string; code: string } = { name: '', code: '' };
   selectedStoryLength: number = 0;
   selectedGenre: string = '';
   setGenre(genre: string): void {
@@ -86,10 +92,11 @@ export class ParametersComponent {
     this.genreChange.emit(genre);
   }
 
-  setLanguage(language: string): void {
-    this.selectedLanguage = language;
-
-    this.languageChange.emit(language);
+  setLanguage(language: string, code: string): void {
+    this.selectedLanguage.name = language;
+    this.selectedLanguage.code = code;
+    console.log(this.selectedLanguage);
+    this.languageChange.emit(this.selectedLanguage);
   }
   setStoryLength(length: number): void {
     this.selectedStoryLength = length;

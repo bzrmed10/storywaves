@@ -17,7 +17,7 @@
     <button
       class="btn-generate"
       (click)="generate()"
-      [disabled]="selectedGenre === '' || selectedLanguage === ''"
+      [disabled]="selectedGenre === '' || selectedLanguage.name === ''"
     >
       <img class="iconBtn" src="../assets/pics/icon/magic.png" />Imagine
     </button>
@@ -35,11 +35,21 @@
     <button class="btn-generateNew" (click)="newStory()">
       <img class="iconBtn" src="../assets/pics/icon/livre.png" />New Story
     </button>
-    <button class="btn-read" (click)="newStory()">
-      <img class="iconBtn" src="../assets/pics/icon/voix.png" />Read
+  </div>
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn-read" (click)="readStory()">
+      <img class="iconBtn" src="../assets/pics/icon/voix.png" />
+    </button>
+    <button class="btn-read" (click)="pauseStory()">
+      <img class="iconBtn" src="../assets/pics/icon/pause.png" />
+    </button>
+    <button class="btn-read" (click)="stopStory()">
+      <img class="iconBtn" src="../assets/pics/icon/stop.png" />
     </button>
   </div>
+
   <h1 class="text-center text100">{{ storyObject.title }}</h1>
 
   <h6 class="text200">{{ storyObject.story }}</h6>
 </div>
+<app-footer></app-footer>

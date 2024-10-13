@@ -5,13 +5,13 @@
       type="button"
       class="m-1"
       [ngClass]="{
-        'btn-unselected': selectedLanguage !== langue,
-        'btn-selected': selectedLanguage === langue
+        'btn-unselected': selectedLanguage.name !== langue.name,
+        'btn-selected': selectedLanguage.name === langue.name
       }"
       *ngFor="let langue of languages"
-      (click)="setLanguage(langue)"
+      (click)="setLanguage(langue.name, langue.code)"
     >
-      {{ langue }}
+      {{ langue.name }}
     </button>
   </div>
 </div>

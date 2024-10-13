@@ -18,14 +18,25 @@ export class AppComponent implements OnInit {
   title = 'storywaves';
   generatedText = '';
   selectedGenre: string = '';
-  selectedLanguage: string = '';
+  selectedLanguage: { name: string; code: string } = { name: '', code: '' };
   selectedStoryLength: number = 2000;
   prompt: string = '';
   storyObject: { title: string; story: string } = { title: '', story: '' };
   showStory: boolean = false;
   loading: boolean = false;
+  uttr: SpeechSynthesisUtterance;
+  testWord: string = '';
+  languages: { name: string; code: string }[] = [
+    { name: 'English', code: 'en-US' },
+    { name: 'French', code: 'fr-FR' },
+    { name: 'Spanish', code: 'es-ES' },
+    { name: 'Russian', code: 'ru-RU' },
+  ];
   ngOnInit(): void {}
-  constructor(private geminiService: GeminiService) {}
+  constructor(private geminiService: GeminiService) {
+    this.uttr = new SpeechSynthesisUtterance();
+    this.uttr.lang = 'en-US';
+  }
   generate() {
     this.loading = true;
     this.generateText(this.prompt);
@@ -51,9 +62,18 @@ export class AppComponent implements OnInit {
     this.updatePrompt();
   }
 
-  onLanguageChange(language: string): void {
-    this.selectedLanguage = language;
-    this.updatePrompt();
+  onLanguageChange(language: { name: string; code: string }): void {
+    const selectedLang = this.languages.find(
+      (lang) => lang.code === language.code
+    );
+    if (selectedLang) {
+      this.selectedLanguage = selectedLang;
+      console.log('aaaaaaaaaaa');
+      console.log(this.selectedLanguage);
+      this.updatePrompt();
+    } else {
+      console.error(`Language with code ${language.code} not found.`);
+    }
   }
   onStoryLengthChange(length: number): void {
     this.selectedStoryLength = length;
@@ -69,7 +89,7 @@ A simple yet captivating plot with a beginning, middle, and end, inspired by the
 A touch of magic or a whimsical twist that stirs the imagination and makes the world feel alive—be it shimmering stars, secret doors, or talking trees.
 A heartfelt message or moral that leaves young readers with a sense of warmth, kindness, or courage.
 Vivid yet soothing descriptions that invite relaxation, as the reader floats through a world of calm wonder.
-The story should be at least ${this.selectedStoryLength} words, using simple and clear language that feels like a gentle lullaby of words. The language should be ${this.selectedLanguage}`;
+The story should be at least ${this.selectedStoryLength} words, using simple and clear language that feels like a gentle lullaby of words. The language should be ${this.selectedLanguage.name}`;
   }
 
   transformStringToObject(input: string): { title: string; story: string } {
@@ -86,11 +106,57 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
     this.showStory = false;
     this.loading = false;
     this.selectedGenre = '';
-    this.selectedLanguage = '';
+    this.selectedLanguage.name = '';
     this.selectedStoryLength = 5000;
   }
 
   cleanTitle(title: string): string {
     return title.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '');
+  }
+
+  readStory() {
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.resume();
+    } else {
+      console.log('reading ...');
+      this.speakText(this.storyObject.title);
+      this.speakText(this.storyObject.story);
+    }
+  }
+
+  speakText(text: string) {
+    const maxChunkLength = 200; // Adjust as needed
+    const chunks = this.splitTextIntoChunks(text, maxChunkLength);
+
+    chunks.forEach((chunk, index) => {
+      const utterance = new SpeechSynthesisUtterance(chunk);
+      utterance.lang = this.selectedLanguage.code; // Set language as needed
+      utterance.rate = 1; // Set rate as needed
+      utterance.pitch = 1; // Set pitch as needed
+
+      if (index === chunks.length - 1) {
+        utterance.onend = () => {
+          console.log('Speech synthesis finished.');
+        };
+      }
+
+      window.speechSynthesis.speak(utterance);
+    });
+  }
+
+  splitTextIntoChunks(text: string, maxChunkLength: number): string[] {
+    const regex = new RegExp(`.{1,${maxChunkLength}}(\\s|$)`, 'g');
+    return text.match(regex) || [];
+  }
+  stopStory() {
+    if (this.uttr) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  pauseStory() {
+    if (this.uttr) {
+      window.speechSynthesis.pause();
+    }
   }
 }
