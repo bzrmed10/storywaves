@@ -1,0 +1,45 @@
+<div class="m-2">
+  <h3 class="text100">Language</h3>
+  <div class="lang-container">
+    <button
+      type="button"
+      class="btn m-1"
+      [ngClass]="{
+        'btn-unselected': selectedLanguage !== langue,
+        'btn-selected': selectedLanguage === langue
+      }"
+      *ngFor="let langue of languages"
+      (click)="setLanguage(langue)"
+    >
+      {{ langue }}
+    </button>
+  </div>
+</div>
+<div class="m-2">
+  <h3 class="text100">Story Length</h3>
+  <button
+    type="button"
+    class="btn m-1"
+    [ngClass]="{
+      'btn-unselected': selectedStoryLength !== length.value,
+      'btn-selected': selectedStoryLength === length.value
+    }"
+    *ngFor="let length of storyLengths"
+    (click)="setStoryLength(length.value)"
+  >
+    {{ length.label }}
+  </button>
+</div>
+<div class="m-2">
+  <h3>Gategories</h3>
+  <div class="genre-container">
+    <div
+      class="genre-item"
+      *ngFor="let genre of genres"
+      (click)="setGenre(genre.title)"
+    >
+      <img src="{{ genre.link }}" alt="{{ genre.title }}" class="genre-image" />
+      <p class="genre-title">{{ genre.title }}</p>
+    </div>
+  </div>
+</div>

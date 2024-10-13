@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container p-4 mb-2 bg" *ngIf="!showStory && !loading">
+  <h1 class="text-center text100">Children's Stories</h1>
+  <h6 class="text-center mb-5 text200">
+    welcome to new platform of Children's Stories Let's discover
+  </h6>
+
+  <app-parameters
+    (genreChange)="onGenreChange($event)"
+    (languageChange)="onLanguageChange($event)"
+    (storyLengthChange)="onStoryLengthChange($event)"
+  >
+    >
+  </app-parameters>
+
+  <div class="d-flex justify-content-center">
+    <button
+      class="btn-generate"
+      (click)="generate()"
+      [disabled]="selectedGenre === '' || selectedLanguage === ''"
+    >
+      Imagine
+    </button>
+  </div>
+</div>
+<div class="loader-container" *ngIf="loading">
+  <div class="loader"></div>
+</div>
+<div class="container p-4 mb-2 bg" *ngIf="showStory">
+  <h1 class="text-center text100">{{ storyObject.title }}</h1>
+
+  <h6>{{ storyObject.story }}</h6>
+  <div class="d-flex justify-content-center">
+    <button class="btn-generate" (click)="newStory()">New Story</button>
+  </div>
+</div>

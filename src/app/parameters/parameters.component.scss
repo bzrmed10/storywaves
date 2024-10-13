@@ -1,0 +1,38 @@
+/* parameters.component.css */
+.genre-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.lang-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.genre-item {
+  flex: 0 0 auto;
+  width: 250px;
+  margin-right: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.genre-image {
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 20px;
+}
+
+.genre-title {
+  margin-top: 10px;
+  font-size: 1.2em;
+}

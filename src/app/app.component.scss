@@ -1,0 +1,129 @@
+:root {
+  --primary-100: #424874;
+  --primary-200: #a6b1e1;
+  --primary-300: #fdf6fd;
+  --accent-100: #d9acf5;
+  --accent-200: #ffcefe;
+  --text-100: #292524;
+  --text-200: #64748b;
+  --bg-100: #f4eeff;
+  --bg-200: #dcd6f7;
+  --bg-300: #bbb9e9;
+}
+
+/* Example usage */
+.bg100 {
+  background-color: #f4eeff;
+}
+.bg200 {
+  background-color: #dcd6f7;
+}
+.bg300 {
+  background-color: #bbb9e9;
+}
+.text100 {
+  color: #292524;
+}
+.text200 {
+  color: #64748b;
+}
+.primary100 {
+  color: #424874;
+}
+.primary200 {
+  color: #a6b1e1;
+}
+.primary300 {
+  color: #fdf6fd;
+}
+.accent100 {
+  color: #d9acf5;
+}
+.accent200 {
+  color: #ffcefe;
+}
+
+/* Selected button style */
+.btn-selected {
+  background-color: #a6b1e1; /* Purple color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-unselected:hover {
+  background-color: #a6b1e1;
+  color: white; /* Purple color */
+}
+
+/* Unselected button style */
+.btn-unselected {
+  background-color: #f0f0f0; /* Light gray color */
+  color: #333; /* Dark gray text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-generate {
+  background-color: #a938ae85; /* Purple color */
+  color: white;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* HTML: <div class="loader"></div> */
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: #a6b1e1;
+  animation: l15 1s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+.loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+@keyframes l15 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.darkmode {
+  color: #424874;
+}
+
+.container {
+  margin-top: 100px; /* Adjust based on the actual height of your navbar */
+}
