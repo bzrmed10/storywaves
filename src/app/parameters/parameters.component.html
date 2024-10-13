@@ -36,6 +36,7 @@
     <div
       class="genre-item"
       [ngClass]="{
+        'btn-unselectedGenre': selectedGenre !== genre.title,
         'btn-selectedGenre': selectedGenre === genre.title
       }"
       *ngFor="let genre of genres"
