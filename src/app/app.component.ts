@@ -114,6 +114,9 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
     };
   }
   newStory() {
+    if (this.uttr) {
+      window.speechSynthesis.cancel();
+    }
     this.showStory = false;
     this.loading = false;
     this.selectedGenre = '';
