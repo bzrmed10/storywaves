@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { ParametersComponent } from './parameters/parameters.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { LoadingComponent } from './loading/loading.component';
+import { UnavailableaiComponent } from './unavailableai/unavailableai.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ParametersComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingComponent,
+    UnavailableaiComponent
   ],
   imports: [
     BrowserModule,

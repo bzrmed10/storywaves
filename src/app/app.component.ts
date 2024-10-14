@@ -25,7 +25,9 @@ export class AppComponent implements OnInit {
   showStory: boolean = false;
   loading: boolean = false;
   uttr: SpeechSynthesisUtterance;
-  testWord: string = '';
+  errorAi: boolean = false;
+  notif: string = '';
+  msgErr: string = '';
   languages: { name: string; code: string }[] = [
     { name: 'English', code: 'en-US' },
     { name: 'French', code: 'fr-FR' },
@@ -38,8 +40,16 @@ export class AppComponent implements OnInit {
     this.uttr.lang = 'en-US';
   }
   generate() {
-    this.loading = true;
-    this.generateText(this.prompt);
+    if (this.selectedGenre === '' || this.selectedLanguage.name === '') {
+      this.msgErr = 'Please select a Category and language';
+      setTimeout(() => {
+        this.msgErr = '';
+      }, 3000);
+    } else {
+      this.loading = true;
+      this.generateText(this.prompt);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   async generateText(prompt: string): Promise<void> {
@@ -47,13 +57,15 @@ export class AppComponent implements OnInit {
       console.log('Loading....');
       this.generatedText = await this.geminiService.generateText(prompt);
       this.storyObject = this.transformStringToObject(this.generatedText);
-      console.log('storyObject:', this.storyObject);
-      console.log('title:', this.storyObject.title);
-      console.log('story:', this.storyObject.story);
       this.showStory = true;
       this.loading = false;
     } catch (error) {
       console.error('Error generating text:', error);
+      this.loading = false;
+      this.errorAi = true;
+      setTimeout(() => {
+        this.errorAi = false;
+      }, 5000);
     }
   }
 
@@ -66,10 +78,9 @@ export class AppComponent implements OnInit {
     const selectedLang = this.languages.find(
       (lang) => lang.code === language.code
     );
-    if (selectedLang) {
+
+    if (selectedLang && selectedLang.name) {
       this.selectedLanguage = selectedLang;
-      console.log('aaaaaaaaaaa');
-      console.log(this.selectedLanguage);
       this.updatePrompt();
     } else {
       console.error(`Language with code ${language.code} not found.`);
@@ -106,7 +117,6 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
     this.showStory = false;
     this.loading = false;
     this.selectedGenre = '';
-    this.selectedLanguage.name = '';
     this.selectedStoryLength = 5000;
   }
 
@@ -117,8 +127,15 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
   readStory() {
     if (window.speechSynthesis.speaking) {
       window.speechSynthesis.resume();
+      this.notif = 'Story Resumed ...';
+      setTimeout(() => {
+        this.notif = '';
+      }, 3000);
     } else {
-      console.log('reading ...');
+      this.notif = 'Reading ...';
+      setTimeout(() => {
+        this.notif = '';
+      }, 3000);
       this.speakText(this.storyObject.title);
       this.speakText(this.storyObject.story);
     }
@@ -151,11 +168,19 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
   stopStory() {
     if (this.uttr) {
       window.speechSynthesis.cancel();
+      this.notif = 'Story Stopped...';
+      setTimeout(() => {
+        this.notif = '';
+      }, 3000);
     }
   }
 
   pauseStory() {
     if (this.uttr) {
+      this.notif = 'Story paused ...';
+      setTimeout(() => {
+        this.notif = '';
+      }, 3000);
       window.speechSynthesis.pause();
     }
   }

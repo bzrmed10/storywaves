@@ -95,7 +95,6 @@ export class ParametersComponent {
   setLanguage(language: string, code: string): void {
     this.selectedLanguage.name = language;
     this.selectedLanguage.code = code;
-    console.log(this.selectedLanguage);
     this.languageChange.emit(this.selectedLanguage);
   }
   setStoryLength(length: number): void {

@@ -126,8 +126,16 @@ h5 {
   cursor: pointer;
   margin-right: 10px;
 }
+.btn-generateNew:hover {
+  background-color: rgb(169 56 174);
+}
+.btn-generate:hover {
+  background-color: rgb(169 56 174);
+}
+
 .btn-read {
-  background-color: #5966cacf; /* Purple color */
+  /* Purple color */
+  background-color: rgb(89 102 202 / 38%);
   color: white;
   padding: 14px;
   width: 100%;
@@ -136,6 +144,9 @@ h5 {
   font-size: 20px;
   cursor: pointer;
   margin-right: 10px;
+}
+.btn-read:hover {
+  background-color: #5966cacf;
 }
 /* HTML: <div class="loader"></div> */
 .loading-message {
@@ -185,4 +196,7 @@ h5 {
 
 .container {
   margin-top: 100px; /* Adjust based on the actual height of your navbar */
+}
+.msgVoice {
+  color: rgba(143, 238, 143, 0.9);
 }
