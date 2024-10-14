@@ -126,7 +126,10 @@ The story should be at least ${this.selectedStoryLength} words, using simple and
 
   readStory() {
     if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.resume();
+      //window.speechSynthesis.resume();
+      window.speechSynthesis.cancel();
+      this.speakText(this.storyObject.title);
+      this.speakText(this.storyObject.story);
       this.notif = 'Story Resumed ...';
       setTimeout(() => {
         this.notif = '';
